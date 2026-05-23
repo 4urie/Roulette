@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derma Link Chest — Roulette</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- TOP BAR -->
+  <header id="topBar">
+    <div class="logo">
+      <span class="logo-icon">&#9876;</span>
+      <h1>Derma Link Chest</h1>
+    </div>
+    <div class="top-actions">
+      <span id="adminBadge" class="admin-badge hidden">&#9679; ADMIN</span>
+      <button id="btnAdminLogin" class="btn-icon" title="Admin Login">&#128100;</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ROULETTE -->
+    <section id="rouletteSection">
+      <div class="section-title">
+        <span class="deco left">&#10022;</span>
+        <h2>Open the Chest</h2>
+        <span class="deco right">&#10022;</span>
+      </div>
+      <div id="rouletteViewport">
+        <div id="marker"></div>
+        <div id="rouletteStrip"></div>
+      </div>
+      <div id="controls">
+        <div class="speed-control">
+          <label for="spinSpeed">Speed</label>
+          <input type="range" id="spinSpeed" min="1" max="5" value="3" />
+        </div>
+        <button id="btnSpin" class="btn-spin">
+          <span class="spin-text">SPIN</span>
+          <span class="spin-glow"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PRIZE POOL -->
+    <section id="itemPoolSection">
+      <div class="section-title">
+        <span class="deco left">&#10022;</span>
+        <h2>Prize Pool</h2>
+        <span class="deco right">&#10022;</span>
+      </div>
+      <!-- Admin controls — hidden until logged in -->
+      <div id="adminControls" class="pool-actions hidden">
+        <button id="btnEditMode" class="btn-secondary">&#9998; Edit Mode</button>
+        <button id="btnAddItem" class="btn-secondary">&#43; Add Prize</button>
+      </div>
+      <div id="itemPool"></div>
+    </section>
+
+    <!-- HIDDEN PRIZES (Admin only) -->
+    <section id="hiddenPoolSection" class="hidden admin-section">
+      <div class="section-title">
+        <span class="deco left">&#128274;</span>
+        <h2>Hidden Prizes</h2>
+        <span class="deco right">&#128274;</span>
+      </div>
+      <p class="hidden-pool-desc">&#9888; These prizes appear in the spin wheel but are <strong>NOT visible</strong> to regular users.</p>
+      <div class="pool-actions">
+        <button id="btnAddHiddenItem" class="btn-secondary btn-hidden-add">&#43; Add Hidden Prize</button>
+      </div>
+      <div id="hiddenPool"></div>
+    </section>
+  </main>
+
+  <!-- ADMIN LOGIN MODAL -->
+  <div id="loginModal" class="modal-overlay hidden">
+    <div class="modal-content login-modal">
+      <button class="modal-close-x" id="btnCloseLogin">&#10005;</button>
+      <h2>Admin Access</h2>
+      <div id="loginView">
+        <div class="login-form">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter admin email" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" placeholder="Enter password" autocomplete="off" />
+              <button type="button" id="btnTogglePass" class="btn-eye" title="Show/Hide Password">&#128065;</button>
+            </div>
+          </div>
+          <p id="loginError" class="login-error hidden">&#10007; Invalid email or password.</p>
+          <button id="btnDoLogin" class="btn-spin login-btn">LOGIN</button>
+        </div>
+      </div>
+      <div id="loggedInView" class="hidden">
+        <p class="logged-in-msg">&#9989; Logged in as <strong>Admin</strong></p>
+        <button id="btnLogout" class="btn-secondary btn-danger">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIN MODAL -->
+  <div id="winModal" class="modal-overlay hidden">
+    <div id="winModalContent" class="modal-content">
+      <div class="modal-particles" id="modalParticles"></div>
+      <h2>You Unlocked</h2>
+      <div id="winImageWrap"><img id="winImage" src="" alt="Won Item" /></div>
+      <p id="winName"></p>
+      <p id="winRarity"></p>
+      <button id="btnCloseModal" class="btn-secondary">Collect</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
